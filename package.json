@@ -1,16 +1,16 @@
 {
   "name": "@aabdelmonaem/cra-template",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.0.4",
+  "description": "Template to create react application with core-lib",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ahmed Elbari",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/aabdelmonaem/cra-template"
   },
-  "keywords": ["react , react template", "template"]
+  "keywords": ["cra-template"]
 }
