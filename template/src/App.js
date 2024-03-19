@@ -23,19 +23,34 @@ import AppRoutes from "./AppRoutes";
 /**
  * Importing components and utilities from Core-lib
  */
-import { AuthProvider, useAuthContext, ThemeProvider, Languages, ConfigProvider, LanguageProvider } from "@aabdelmonaem/core-lib";
+import { AuthProvider, useAuthContext, ThemeProvider, Languages, ConfigProvider, LanguageProvider, ModalProvider, NotificationProvider } from "@aabdelmonaem/core-lib";
 
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
-       {/* AuthProvider manages user authentication state. */}
-        <AuthProvider
-          localRoles={localRoles}
-          signinService={AuthService.signin}
-          signoutService={AuthService.signout}>
-          <AuthConfigWrapper />
-        </AuthProvider>
+        <ModalProvider>
+          <NotificationProvider
+            config={
+              {
+                position: 'top-center',
+                isCloseable: false,
+                // showTitle: true,
+                // showIcon: true,
+                // duration: 10,
+                // animationDuration: 600,
+              }
+            }
+          >
+            {/* AuthProvider manages user authentication state. */}
+            <AuthProvider
+              localRoles={localRoles}
+              signinService={AuthService.signin}
+              signoutService={AuthService.signout}>
+              <AuthConfigWrapper />
+            </AuthProvider>
+          </NotificationProvider>
+        </ModalProvider>
       </BrowserRouter>
     </RecoilRoot>
   );
@@ -48,7 +63,7 @@ function AuthConfigWrapper() {
   const { i18n, t } = useTranslation();
   return (
     <ConfigProvider
-     // Set isAuth based on whether a user is authenticated.
+      // Set isAuth based on whether a user is authenticated.
       isAuth={auth.user !== null}
       configLocal={ConfigLocal}
       configService={ConfigService.getAllConfig}>
@@ -57,7 +72,7 @@ function AuthConfigWrapper() {
         translator={t}
         defaultLang={Languages.en}>
         <ThemeProvider>
-           {/* Render your application routes here. */}
+          {/* Render your application routes here. */}
           <AppRoutes />
         </ThemeProvider>
       </LanguageProvider>
