@@ -1,6 +1,6 @@
 {
   "name": "@aabdelmonaem/cra-template",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Template to create react application with core-lib",
   "main": "index.js",
   "scripts": {
