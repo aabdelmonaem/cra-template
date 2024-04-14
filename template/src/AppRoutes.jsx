@@ -62,8 +62,13 @@ function AppRoutes() {
       if (auth.user) {
         try {
           setFilteredRoutes(
-            routes.filter((route) =>
-              auth.checkPermission(route.requiredPermission)
+            routes.filter((route) => {
+              if (!route.requiredPermission.length)
+                return true;
+              else
+                return auth.checkPermission(route.requiredPermission);
+            }
+
             )
           );
         } catch (error) {
@@ -106,9 +111,12 @@ function AppRoutes() {
             key={index + 1}
             path={route.path}
             element={
-              <RequireAuth permissions={route.requiredPermission}>
-                {<route.component />}
-              </RequireAuth>
+              route.requiredPermission.length ?
+                <RequireAuth permissions={route.requiredPermission}>
+                  {<route.component />}
+                </RequireAuth>
+                :
+                <route.component />
             }
           />
         ))}
